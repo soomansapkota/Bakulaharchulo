@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink, useLocation } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { navLinks, site } from '../data/site'
 import { cx } from '../lib/cx'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
-  const { pathname } = useLocation()
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
+
     return () => {
       document.body.style.overflow = ''
     }
@@ -19,6 +19,7 @@ export default function Navbar() {
 
   return (
     <>
+      {/* Skip to content */}
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:bg-ink focus:px-4 focus:py-2 focus:text-sm focus:text-paper"
@@ -26,12 +27,21 @@ export default function Navbar() {
         Skip to content
       </a>
 
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-transparent bg-transparent backdrop-blur-sm">
-        <nav className="shell flex h-20 items-center justify-between gap-8" aria-label="Main">
-          <Link to="/" className="font-display text-[1.2rem] leading-none text-ink md:text-[1.35rem]">
+      {/* Desktop / Main Navbar */}
+      <header className="fixed inset-x-0 top-0 z-40 border-b border-line/80 bg-[#f7f4ee]/95 backdrop-blur-md">
+        <nav
+          className="shell flex h-20 items-center justify-between gap-8"
+          aria-label="Main"
+        >
+          {/* Restaurant Name */}
+          <Link
+            to="/"
+            className="font-display text-[1.2rem] leading-none text-ink md:text-[1.35rem]"
+          >
             {site.name}
           </Link>
 
+          {/* Desktop Navigation */}
           <ul className="hidden items-center gap-9 md:flex">
             {navLinks.map((link) => (
               <li key={link.to}>
@@ -53,6 +63,7 @@ export default function Navbar() {
             ))}
           </ul>
 
+          {/* Mobile Menu Button */}
           <div className="flex items-center gap-3">
             <button
               type="button"
@@ -67,13 +78,14 @@ export default function Navbar() {
         </nav>
       </header>
 
-      {/* Mobile menu */}
+      {/* Mobile Menu */}
       <div
         className={cx(
           'fixed inset-0 z-50 md:hidden',
           open ? 'pointer-events-auto' : 'pointer-events-none',
         )}
       >
+        {/* Overlay */}
         <div
           onClick={close}
           className={cx(
@@ -81,19 +93,25 @@ export default function Navbar() {
             open ? 'opacity-100' : 'opacity-0',
           )}
         />
+
+        {/* Menu Panel */}
         <div
           role="dialog"
           aria-modal={open}
           aria-label="Navigation"
           className={cx(
             'absolute inset-y-0 right-0 flex w-[min(20rem,88vw)] flex-col bg-paper transition-transform duration-300 ease-soft',
-            open ? 'visible translate-x-0' : 'invisible translate-x-full',
+            open
+              ? 'visible translate-x-0'
+              : 'invisible translate-x-full',
           )}
         >
+          {/* Mobile Header */}
           <div className="flex h-20 items-center justify-between border-b border-line px-6">
             <span className="font-display text-[1.15rem] tracking-[0.12em] text-ink">
               {site.name.toUpperCase()}
             </span>
+
             <button
               type="button"
               onClick={close}
@@ -104,9 +122,13 @@ export default function Navbar() {
             </button>
           </div>
 
+          {/* Mobile Navigation Links */}
           <ul className="flex-1 px-6 py-8">
             {navLinks.map((link) => (
-              <li key={link.to} className="border-b border-line/70 last:border-0">
+              <li
+                key={link.to}
+                className="border-b border-line/70 last:border-0"
+              >
                 <NavLink
                   to={link.to}
                   end={link.to === '/'}
@@ -123,7 +145,6 @@ export default function Navbar() {
               </li>
             ))}
           </ul>
-
         </div>
       </div>
     </>
