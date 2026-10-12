@@ -1,7 +1,6 @@
 import { Link, useParams } from 'react-router-dom'
 import { ArrowLeft } from 'lucide-react'
 import { findDish, relatedDishes } from '../data/dishes'
-import { price } from '../lib/cx'
 import DishCard from '../components/DishCard'
 import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
@@ -53,7 +52,6 @@ export default function DishDetails() {
 
           <h1 className="mt-4 text-5xl leading-[1.05] sm:text-6xl">{dish.name}</h1>
 
-          <p className="mt-5 font-display text-3xl text-ink">{price(dish.price)}</p>
 
           <p className="mt-7 max-w-prose text-[1.05rem] leading-[1.9] text-muted">
             {dish.description}

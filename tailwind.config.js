@@ -13,6 +13,10 @@ export default {
         muted: '#6E6962',
         saffron: '#B88A3B',
         gold: '#D8C7A2',
+        char: '#1B1512',
+        coal: '#261D18',
+        ember: '#B8432B',
+        flame: '#E9A23B',
       },
       fontFamily: {
         display: ['"Playfair Display"', 'Georgia', 'serif'],

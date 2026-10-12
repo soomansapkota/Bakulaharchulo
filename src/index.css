@@ -69,6 +69,24 @@
   }
 
   .section-kicker {
-    @apply text-[0.7rem] font-semibold uppercase tracking-[0.2em] text-saffron;
+    @apply inline-flex items-center gap-3 text-[0.72rem] font-semibold uppercase tracking-[0.24em] text-saffron;
+  }
+  .section-kicker::before {
+    content: '';
+    @apply h-px w-8 bg-current;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-ember px-7 py-3.5 text-[0.85rem] font-semibold tracking-[0.06em] text-white shadow-[0_10px_30px_rgba(184,67,43,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#a33a24] hover:shadow-[0_14px_36px_rgba(184,67,43,0.45)];
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-current px-7 py-3.5 text-[0.85rem] font-semibold tracking-[0.06em] transition-all duration-300 hover:-translate-y-0.5;
+  }
+
+  /* Soft grain so flat dark panels feel less digital. */
+  .grain {
+    background-image: radial-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 3px 3px;
   }
 }

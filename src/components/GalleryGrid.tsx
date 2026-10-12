@@ -100,12 +100,11 @@ export default function GalleryGrid({ images }: { images: GalleryImage[] }) {
             </button>
 
             <figure className="w-full max-w-4xl">
-              <Photo
+              <img
+                key={active.src}
                 src={active.src}
                 alt={active.alt}
-                eager
-                className="max-h-[70vh] w-full"
-                imgClassName="object-contain"
+                className="mx-auto max-h-[75vh] w-auto max-w-full rounded-[1rem] object-contain"
               />
               <figcaption className="mt-4 text-center text-[0.9rem] text-muted">
                 {active.caption}

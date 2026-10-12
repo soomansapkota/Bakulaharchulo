@@ -1,23 +1,20 @@
 import { MapPin } from 'lucide-react'
 import { openingHours, site } from '../data/site'
-import { photo } from '../data/dishes'
-import Photo from '../components/Photo'
-import Reveal from '../components/Reveal'
+import PageHeader from '../components/PageHeader'
 
-const contactImage = photo('1552566626-52f8b828add9', 1400)
 const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.address.full)}&output=embed`
 
 export default function Contact() {
   return (
-    <div className="pt-20">
-      <section className="shell py-20 text-center lg:py-28">
-        <h1 className="text-5xl leading-[1.08] sm:text-6xl">Contact</h1>
-        <p className="mx-auto mt-5 max-w-lg text-[1.05rem] leading-relaxed text-muted">
-          Where to find us, and when the kitchen is open.
-        </p>
-      </section>
+    <div>
+      <PageHeader
+        kicker="Visit us"
+        title="Contact"
+        subtitle="Where to find us, and when the kitchen is open."
+        image="/images/kitchen.jpg"
+      />
 
-      <section className="shell grid gap-14 pb-24 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:pb-32">
+      <section className="shell grid gap-14 py-20 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:py-28">
         <div className="space-y-6">
           <div className="rounded-[1.75rem] border border-line bg-paper p-6 shadow-[0_18px_45px_rgba(20,19,17,0.05)] sm:p-8">
             <h2 className="font-display text-3xl">Visit Us</h2>
@@ -86,14 +83,6 @@ export default function Contact() {
               className="h-[24rem] w-full rounded-[1.15rem] sm:h-[28rem]"
             />
           </div>
-
-          <Reveal delay={80}>
-            <Photo
-              src={contactImage}
-              alt="A table laid with brass plates"
-              className="aspect-[4/3] overflow-hidden rounded-[1.75rem] border border-line shadow-[0_18px_45px_rgba(20,19,17,0.05)]"
-            />
-          </Reveal>
         </div>
       </section>
     </div>

@@ -2,12 +2,14 @@ import type { ReactNode } from 'react'
 import { cx } from '../lib/cx'
 
 export default function SectionHeading({
+  kicker,
   title,
   subtitle,
   align = 'center',
   id,
   className,
 }: {
+  kicker?: string
   title: ReactNode
   subtitle?: ReactNode
   align?: 'left' | 'center'
@@ -16,6 +18,7 @@ export default function SectionHeading({
 }) {
   return (
     <div className={cx(align === 'center' && 'text-center', className)}>
+      {kicker && <p className="section-kicker mb-5">{kicker}</p>}
       <h2 id={id} className="text-4xl leading-[1.1] sm:text-5xl lg:text-[3.2rem]">
         {title}
       </h2>

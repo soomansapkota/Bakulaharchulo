@@ -1,17 +1,18 @@
 import { galleryImages } from '../data/gallery'
 import GalleryGrid from '../components/GalleryGrid'
+import PageHeader from '../components/PageHeader'
 
 export default function Gallery() {
   return (
-    <div className="pt-20">
-      <section className="shell py-20 text-center lg:py-28">
-        <h1 className="text-5xl leading-[1.08] sm:text-6xl">Gallery</h1>
-        <p className="mx-auto mt-5 max-w-lg text-[1.05rem] leading-relaxed text-muted">
-          The room, the kitchen and the food, photographed during service.
-        </p>
-      </section>
+    <div>
+      <PageHeader
+        kicker="Gallery"
+        title="From our kitchen"
+        subtitle="The food, the fire and the people who cook it."
+        image="/images/tandoor-chicken-skewers.jpg"
+      />
 
-      <section className="shell pb-24 lg:pb-32">
+      <section className="shell py-20 lg:py-28">
         <GalleryGrid images={galleryImages} />
       </section>
     </div>

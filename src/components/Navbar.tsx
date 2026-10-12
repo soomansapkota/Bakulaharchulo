@@ -1,11 +1,23 @@
 import { useEffect, useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import { Menu, X } from 'lucide-react'
 import { navLinks, site } from '../data/site'
 import { cx } from '../lib/cx'
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  // Pages that open with a dark photo banner get a see-through bar at the top.
+  const overDark = !scrolled && navLinks.some((link) => link.to === pathname)
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
@@ -28,7 +40,14 @@ export default function Navbar() {
       </a>
 
       {/* Desktop / Main Navbar */}
-      <header className="fixed inset-x-0 top-0 z-40 border-b border-line/80 bg-[#f7f4ee]/95 backdrop-blur-md">
+      <header
+        className={cx(
+          'fixed inset-x-0 top-0 z-40 transition-all duration-300',
+          overDark
+            ? 'border-b border-transparent bg-gradient-to-b from-char/60 to-transparent bg-no-repeat'
+            : 'border-b border-line/80 bg-paper/95 shadow-[0_6px_24px_rgba(33,28,26,0.06)] backdrop-blur-md',
+        )}
+      >
         <nav
           className="shell flex h-20 items-center justify-between gap-8"
           aria-label="Main"
@@ -36,7 +55,10 @@ export default function Navbar() {
           {/* Restaurant Name */}
           <Link
             to="/"
-            className="font-display text-[1.2rem] leading-none text-ink md:text-[1.35rem]"
+            className={cx(
+              'font-display text-[1.2rem] leading-none transition-colors md:text-[1.35rem]',
+              overDark ? 'text-white' : 'text-ink',
+            )}
           >
             {site.name}
           </Link>
@@ -52,8 +74,11 @@ export default function Navbar() {
                     cx(
                       'relative inline-flex items-center text-[0.82rem] font-medium tracking-[0.08em] transition-colors duration-200 after:absolute after:-bottom-2 after:left-0 after:h-px after:w-full after:origin-left after:scale-x-0 after:bg-current after:transition-transform after:duration-200 after:content-[""]',
                       isActive
-                        ? 'text-ink after:scale-x-100'
-                        : 'text-graphite hover:text-saffron hover:after:scale-x-100',
+                        ? cx(overDark ? 'text-white' : 'text-ink', 'after:scale-x-100')
+                        : cx(
+                            overDark ? 'text-white/75 hover:text-white' : 'text-graphite hover:text-ember',
+                            'hover:after:scale-x-100',
+                          ),
                     )
                   }
                 >
@@ -70,7 +95,10 @@ export default function Navbar() {
               onClick={() => setOpen(true)}
               aria-label="Open navigation"
               aria-expanded={open}
-              className="grid h-10 w-10 place-items-center text-ink md:hidden"
+              className={cx(
+                'grid h-10 w-10 place-items-center md:hidden',
+                overDark ? 'text-white' : 'text-ink',
+              )}
             >
               <Menu className="h-5 w-5" aria-hidden="true" />
             </button>
@@ -136,7 +164,7 @@ export default function Navbar() {
                   className={({ isActive }) =>
                     cx(
                       'block py-4 font-display text-2xl transition-colors',
-                      isActive ? 'text-saffron' : 'text-ink',
+                      isActive ? 'text-ember' : 'text-ink',
                     )
                   }
                 >

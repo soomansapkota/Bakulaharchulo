@@ -26,10 +26,10 @@ export default function CategoryFilter({
               aria-selected={isActive}
               onClick={() => onChange(category)}
               className={cx(
-                'whitespace-nowrap border px-4 py-2.5 text-[0.76rem] font-semibold uppercase tracking-[0.12em] transition-all duration-200',
+                'whitespace-nowrap rounded-full border px-6 py-2.5 text-[0.76rem] font-semibold uppercase tracking-[0.12em] transition-all duration-200',
                 isActive
-                  ? 'border-ink bg-ink text-paper'
-                  : 'border-line bg-paper text-graphite hover:border-saffron hover:text-saffron',
+                  ? 'border-ember bg-ember text-white shadow-[0_8px_20px_rgba(184,67,43,0.3)]'
+                  : 'border-line bg-white text-graphite hover:border-ember hover:text-ember',
               )}
             >
               {category}

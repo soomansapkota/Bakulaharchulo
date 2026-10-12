@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { dishes, photo } from '../data/dishes'
+import { ArrowRight, Flame, HandPlatter, Soup, Wheat } from 'lucide-react'
+import { dishes } from '../data/dishes'
 import { galleryImages } from '../data/gallery'
 import DishCard from '../components/DishCard'
 import LocationSection from '../components/LocationSection'
@@ -7,69 +8,132 @@ import Photo from '../components/Photo'
 import Reveal from '../components/Reveal'
 import SectionHeading from '../components/SectionHeading'
 
-const heroImage = photo('1552566626-52f8b828add9', 2000)
-const introImage = photo('1596040033229-a9821ebd058d', 1200)
-const aboutImage = photo('1541544181051-e46607bc22a4', 1200)
+const heroImage = '/images/khaja-set.jpg'
+const introImage = '/images/tandoori-naan.jpg'
+const introImageSmall = '/images/chef-tandoor-naan.jpg'
+const fireImage = '/images/tandoor-chicken-skewers.jpg'
 
 const featured = [dishes[0], dishes[3], dishes[7]]
-const galleryPreview = galleryImages.slice(0, 3)
+const galleryPreview = galleryImages.slice(0, 4)
+
+const highlights = [
+  { icon: Flame, title: 'Tandoor fired', body: 'Chicken, sekuwa and naan from the clay oven' },
+  { icon: Soup, title: 'Hand-folded momo', body: 'Steamed, fried, jhol and kothey' },
+  { icon: Wheat, title: 'Fresh naan', body: 'Slapped onto the tandoor to order' },
+  { icon: HandPlatter, title: 'Khaja & khana sets', body: 'Full Nepali plates, made to share' },
+]
 
 export default function Home() {
   return (
     <>
-      <section className="shell pb-14 pt-28 lg:pb-20 lg:pt-32">
-        <div className="grid overflow-hidden rounded-[1.75rem] border border-line bg-[#f4efe7] shadow-[0_18px_50px_rgba(33,28,26,0.06)] lg:grid-cols-[1.12fr_0.88fr]">
-          <div className="relative min-h-[360px] sm:min-h-[440px] lg:min-h-[560px]">
-            <Photo
-              src={heroImage}
-              alt="The dining room at Bakulaharchulo Restaurant"
-              eager
-              className="h-full w-full"
-              imgClassName="h-full w-full object-cover"
-            />
-          </div>
+      {/* Hero */}
+      <section className="relative isolate flex min-h-[min(100svh,1000px)] items-end overflow-hidden bg-char text-white">
+        <div aria-hidden="true" className="absolute inset-0 -z-10">
+          <Photo
+            src={heroImage}
+            alt="A khaja set with chicken, fries, peanut sadheko, egg and papad"
+            eager
+            className="h-full w-full bg-char"
+            imgClassName="object-[center_60%]"
+          />
+        </div>
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(27,21,18,0.45)_0%,rgba(27,21,18,0.15)_35%,rgba(27,21,18,0.88)_100%)]"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_20%_100%,rgba(184,67,43,0.25),transparent_55%)]"
+        />
 
-          <div className="flex flex-col justify-center px-6 py-10 sm:px-10 lg:px-14">
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-saffron">
-              Nepali cuisine • warm hospitality
-            </p>
+        <div className="shell pb-20 pt-40 sm:pb-24 lg:pb-28">
+          <div className="max-w-3xl animate-rise">
+            <p className="section-kicker text-flame">Ratnanagar · Chitwan</p>
 
-            <h1 className="mt-5 text-[2.6rem] leading-[1.02] tracking-[-0.04em] sm:text-[3.2rem] lg:text-[4.1rem]">
+            <h1 className="mt-6 text-[3.2rem] leading-[1.02] text-white sm:text-[4.5rem] lg:text-[5.6rem]">
               आगोले स्वाद मिल्छ
             </h1>
-
-            <p className="mt-6 max-w-lg text-[1rem] leading-[1.8] text-graphite sm:text-[1.06rem]">
-              Modern Nepali dining inspired by Himalayan traditions and warm hospitality.
+            <p className="mt-3 font-display text-[1.5rem] italic text-flame sm:text-[1.9rem]">
+              Where fire meets flavour
             </p>
 
+            <p className="mt-6 max-w-xl text-[1.05rem] leading-[1.8] text-white/80">
+              Tandoori, momo, khaja sets and home-style Nepali curries, cooked over flame and
+              served with warm hospitality.
+            </p>
+
+            <div className="mt-10 flex flex-wrap gap-4">
+              <Link to="/menu" className="btn-primary">
+                Explore the Menu
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+              <Link to="/contact" className="btn-ghost text-white hover:bg-white hover:text-char">
+                Find Us
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
+      {/* Highlights strip */}
+      <section aria-label="What we are known for" className="grain bg-coal text-white">
+        <ul className="shell grid grid-cols-2 gap-x-6 gap-y-10 py-14 lg:grid-cols-4">
+          {highlights.map((item, index) => {
+            const Icon = item.icon
+            return (
+              <li key={item.title}>
+                <Reveal delay={index * 80} className="flex flex-col items-start gap-4 sm:flex-row">
+                  <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-ember/15 text-flame ring-1 ring-flame/30">
+                    <Icon className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block font-display text-[1.2rem] text-white">{item.title}</span>
+                    <span className="mt-1 block text-[0.85rem] leading-relaxed text-white/60">
+                      {item.body}
+                    </span>
+                  </span>
+                </Reveal>
+              </li>
+            )
+          })}
+        </ul>
+      </section>
+
       {/* Introduction */}
       <section className="bg-paper py-24 lg:py-32" aria-labelledby="intro">
-        <div className="shell grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
+        <div className="shell grid items-center gap-16 lg:grid-cols-2 lg:gap-24">
           <Reveal>
-            <h2 id="intro" className="text-4xl leading-[1.12] sm:text-5xl">
-              A Taste of the Himalayas
+            <p className="section-kicker">Our kitchen</p>
+            <h2 id="intro" className="mt-5 text-4xl leading-[1.1] sm:text-5xl">
+              A taste of the Himalayas, close to home
             </h2>
             <p className="mt-7 max-w-prose text-[1.05rem] leading-[1.9] text-muted">
-              Bakulaharchulo Restaurant brings the warmth, spices and traditions of Nepal to every
-              table, combining familiar flavours with a contemporary dining experience.
+              Bakulaharchulo brings the warmth, spices and traditions of Nepal to every table.
+              Naan comes straight off the tandoor, momo are folded by hand, and every curry is
+              cooked the way it is at home.
             </p>
             <Link
               to="/about"
-              className="mt-10 inline-block border-b border-ink pb-1 text-[0.88rem] tracking-[0.08em] text-ink transition-colors hover:border-saffron hover:text-saffron"
+              className="group mt-10 inline-flex items-center gap-2 text-[0.9rem] font-semibold tracking-[0.06em] text-ember"
             >
-              Our story
+              Meet the team
+              <ArrowRight
+                className="h-4 w-4 transition-transform group-hover:translate-x-1"
+                aria-hidden="true"
+              />
             </Link>
           </Reveal>
 
-          <Reveal delay={100}>
+          <Reveal delay={100} className="relative pb-16 pr-10 sm:pr-16">
             <Photo
               src={introImage}
-              alt="Spices arranged in small bowls"
-              className="aspect-[4/5] w-full"
+              alt="Fresh tandoori naan in a woven basket"
+              className="aspect-[4/5] w-full rounded-[1.75rem] shadow-[0_30px_60px_rgba(33,28,26,0.18)]"
+            />
+            <Photo
+              src={introImageSmall}
+              alt="The chef shaping naan beside the tandoor"
+              className="absolute bottom-0 right-0 aspect-square w-[45%] rounded-[1.5rem] border-[6px] border-paper shadow-[0_20px_40px_rgba(33,28,26,0.2)]"
             />
           </Reveal>
         </div>
@@ -80,6 +144,7 @@ export default function Home() {
         <div className="shell">
           <SectionHeading
             id="featured"
+            kicker="Signature plates"
             title="From the Menu"
             subtitle="Three dishes that say most about how we cook."
           />
@@ -95,71 +160,82 @@ export default function Home() {
           </ul>
 
           <div className="mt-14 text-center">
-            <Link
-              to="/menu"
-              className="inline-block border border-ink px-10 py-4 text-[0.88rem] tracking-[0.12em] text-ink transition-colors duration-300 hover:bg-ink hover:text-paper"
-            >
+            <Link to="/menu" className="btn-primary">
               View Full Menu
+              <ArrowRight className="h-4 w-4" aria-hidden="true" />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* About preview */}
-      <section className="bg-paper py-24 lg:py-32" aria-labelledby="about-preview">
-        <div className="shell grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
-          <Reveal className="lg:order-2">
-            <h2 id="about-preview" className="text-4xl leading-[1.12] sm:text-5xl">
-              Cooked over open fire
-            </h2>
-            <p className="mt-7 max-w-prose text-[1.05rem] leading-[1.9] text-muted">
-              Rooted in Himalayan tradition and inspired by Nepal’s rich food culture,
-              Bakulaharchulo Restaurant celebrates bold spices, open-fire cooking and the warmth of
-              sharing food.
-            </p>
-            <Link
-              to="/about"
-              className="mt-10 inline-block border-b border-ink pb-1 text-[0.88rem] tracking-[0.08em] text-ink transition-colors hover:border-saffron hover:text-saffron"
-            >
-              Read more
-            </Link>
+      {/* Fire */}
+      <section className="grain relative overflow-hidden bg-char py-24 text-white lg:py-32" aria-labelledby="fire">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-40 top-1/2 h-[36rem] w-[36rem] -translate-y-1/2 rounded-full bg-ember/20 blur-[120px]"
+        />
+        <div className="shell relative grid items-center gap-14 lg:grid-cols-2 lg:gap-24">
+          <Reveal>
+            <Photo
+              src={fireImage}
+              alt="Chicken skewers roasting over the tandoor fire"
+              className="aspect-[4/5] w-full rounded-[1.75rem] shadow-[0_30px_80px_rgba(0,0,0,0.5)]"
+            />
           </Reveal>
 
-          <Reveal delay={100} className="lg:order-1">
-            <Photo
-              src={aboutImage}
-              alt="Flames rising from the charcoal grill"
-              className="aspect-[4/3] w-full"
-            />
+          <Reveal delay={100}>
+            <p className="section-kicker text-flame">The tandoor</p>
+            <h2 id="fire" className="mt-5 text-4xl leading-[1.1] text-white sm:text-5xl">
+              Cooked over open fire
+            </h2>
+            <p className="mt-7 max-w-prose text-[1.05rem] leading-[1.9] text-white/70">
+              Our clay tandoor is where the flavour starts. Marinated chicken chars on the skewer, sekuwa picks
+              up its smoke, and naan blisters against the walls in under a minute. It is the heart
+              of the kitchen, and the reason for our name.
+            </p>
+
+            <dl className="mt-10 grid grid-cols-3 gap-6 border-t border-white/10 pt-8">
+              {[
+                { value: '90+', label: 'Dishes & drinks' },
+                { value: '10', label: 'Kinds of momo' },
+                { value: '1', label: 'Hot tandoor' },
+              ].map((stat) => (
+                <div key={stat.label}>
+                  <dt className="sr-only">{stat.label}</dt>
+                  <dd className="font-display text-4xl text-flame sm:text-5xl">{stat.value}</dd>
+                  <dd className="mt-2 text-[0.78rem] uppercase tracking-[0.14em] text-white/55">
+                    {stat.label}
+                  </dd>
+                </div>
+              ))}
+            </dl>
           </Reveal>
         </div>
       </section>
 
       {/* Gallery preview */}
-      <section className="border-t border-line bg-paper py-24 lg:py-32" aria-labelledby="gallery-preview">
+      <section className="bg-paper py-24 lg:py-32" aria-labelledby="gallery-preview">
         <div className="shell">
           <SectionHeading
             id="gallery-preview"
-            title="The Room"
-            subtitle="Photographs from the dining room, the kitchen and the grill."
+            kicker="Gallery"
+            title="Straight from our kitchen"
+            subtitle="The food, the fire and the people who cook it."
           />
 
-          <ul className="mt-16 grid gap-4 sm:grid-cols-3">
-            {galleryPreview.map((image) => (
-              <li key={image.id}>
-                <Link to="/gallery" className="group block overflow-hidden">
-                  <Photo src={image.src} alt={image.alt} zoom className="aspect-[4/5] w-full" />
+          <ul className="mt-16 grid grid-cols-2 gap-4 lg:grid-cols-4">
+            {galleryPreview.map((image, index) => (
+              <li key={image.id} className={index % 2 === 1 ? 'lg:mt-10' : undefined}>
+                <Link to="/gallery" className="group block overflow-hidden rounded-[1.25rem]">
+                  <Photo src={image.src} alt={image.alt} zoom className="aspect-[3/4] w-full" />
                 </Link>
               </li>
             ))}
           </ul>
 
-          <div className="mt-12 text-center">
-            <Link
-              to="/gallery"
-              className="border-b border-ink pb-1 text-[0.88rem] tracking-[0.08em] text-ink transition-colors hover:border-saffron hover:text-saffron"
-            >
-              View gallery
+          <div className="mt-14 text-center">
+            <Link to="/gallery" className="btn-ghost text-ink hover:bg-ink hover:text-paper">
+              View Gallery
             </Link>
           </div>
         </div>

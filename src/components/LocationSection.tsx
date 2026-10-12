@@ -10,8 +10,9 @@ export default function LocationSection() {
       <div className="shell">
         <SectionHeading
           id="find-us"
+          kicker="Visit us"
           title="Find Us"
-          subtitle="On George Street, a few minutes from Wynyard. Dinner from five, Tuesday to Sunday."
+          subtitle="In Ratnanagar, Chitwan. Come hungry, and bring the family."
         />
 
         <div className="mt-16 grid gap-12 lg:grid-cols-[1fr_1.25fr] lg:items-start lg:gap-16">
@@ -46,13 +47,13 @@ export default function LocationSection() {
             </dl>
           </div>
 
-          <div className="relative border border-line bg-paper p-2">
+          <div className="relative overflow-hidden rounded-[1.75rem] border border-line bg-white p-2 shadow-[0_20px_50px_rgba(33,28,26,0.08)]">
             <iframe
               title={`Map showing ${site.address.full}`}
               src={mapSrc}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="h-[22rem] w-full grayscale-[0.35] sm:h-[26rem] lg:h-[32rem]"
+              className="h-[22rem] w-full rounded-[1.35rem] grayscale-[0.35] sm:h-[26rem] lg:h-[32rem]"
             />
 
             <div
@@ -62,7 +63,7 @@ export default function LocationSection() {
               <MapPin className="h-9 w-9 fill-paper text-saffron drop-shadow-sm" />
             </div>
 
-            <p className="pointer-events-none absolute bottom-6 left-6 right-6 bg-paper/95 px-5 py-3 text-center text-[0.85rem] text-graphite sm:right-auto sm:text-left">
+            <p className="pointer-events-none absolute bottom-6 left-6 right-6 rounded-xl bg-white/95 px-5 py-3 text-center text-[0.85rem] text-graphite sm:right-auto sm:text-left">
               <span className="font-display text-[1.05rem] tracking-[0.08em] text-ink">
                 {site.name.toUpperCase()}
               </span>
