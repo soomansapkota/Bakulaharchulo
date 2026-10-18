@@ -1,8 +1,7 @@
 import { MapPin } from 'lucide-react'
-import { openingHours, site } from '../data/site'
+import { mapEmbedSrc, openingHours, site } from '../data/site'
 import PageHeader from '../components/PageHeader'
 
-const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.address.full)}&output=embed`
 
 export default function Contact() {
   return (
@@ -77,7 +76,7 @@ export default function Contact() {
           <div className="overflow-hidden rounded-[1.75rem] border border-line bg-paper p-2 shadow-[0_18px_45px_rgba(20,19,17,0.08)]">
             <iframe
               title={`Map showing ${site.address.full}`}
-              src={mapSrc}
+              src={mapEmbedSrc}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="h-[24rem] w-full rounded-[1.15rem] sm:h-[28rem]"

@@ -11,9 +11,11 @@ export const site = {
   phone: '',
   phoneHref: '',
   email: 'bakulaharchulho@gmail.com',
-  /** Used to centre the embedded map. */
-  coordinates: { lat: 27.65, lng: 84.45 },
+  /** Exact restaurant location, used for the embedded map. */
+  coordinates: { lat: 27.62582, lng: 84.50929 },
 }
+
+export const mapEmbedSrc = `https://www.google.com/maps?q=${site.coordinates.lat},${site.coordinates.lng}&z=17&output=embed`
 
 export const openingHours = [
   { days: 'Tuesday – Thursday', hours: '5:00 pm – 10:00 pm' },

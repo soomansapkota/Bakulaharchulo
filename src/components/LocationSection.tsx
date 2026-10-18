@@ -1,8 +1,6 @@
-import { MapPin } from 'lucide-react'
-import { openingHours, site } from '../data/site'
+import { mapEmbedSrc, openingHours, site } from '../data/site'
 import SectionHeading from './SectionHeading'
 
-const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(site.address.full)}&output=embed`
 
 export default function LocationSection() {
   return (
@@ -50,18 +48,11 @@ export default function LocationSection() {
           <div className="relative overflow-hidden rounded-[1.75rem] border border-line bg-white p-2 shadow-[0_20px_50px_rgba(33,28,26,0.08)]">
             <iframe
               title={`Map showing ${site.address.full}`}
-              src={mapSrc}
+              src={mapEmbedSrc}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               className="h-[22rem] w-full rounded-[1.35rem] grayscale-[0.35] sm:h-[26rem] lg:h-[32rem]"
             />
-
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-full"
-            >
-              <MapPin className="h-9 w-9 fill-paper text-saffron drop-shadow-sm" />
-            </div>
 
             <p className="pointer-events-none absolute bottom-6 left-6 right-6 rounded-xl bg-white/95 px-5 py-3 text-center text-[0.85rem] text-graphite sm:right-auto sm:text-left">
               <span className="font-display text-[1.05rem] tracking-[0.08em] text-ink">
